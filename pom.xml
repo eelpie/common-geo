@@ -4,7 +4,7 @@
 	<groupId>uk.co.eelpieconsulting.common</groupId>
 	<artifactId>common-geo</artifactId>
 	<packaging>jar</packaging>
-	<name>Common HTTP</name>
+	<name>Common geo</name>
 	<version>1.0.0</version>
 	<description>Shared geo functions</description>
 	<build>
