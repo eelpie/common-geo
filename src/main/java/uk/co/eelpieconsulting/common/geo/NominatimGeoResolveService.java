@@ -14,7 +14,7 @@ import fr.dudie.nominatim.client.NominatimClient;
 import fr.dudie.nominatim.model.Address;
 import fr.dudie.nominatim.model.AddressElement;
 
-public class NominatimGeoResolveService {
+public class NominatimGeoResolveService implements GeoResolveService {
 	
 	private static Logger log = Logger.getLogger(NominatimGeoResolveService.class);
 
@@ -30,6 +30,7 @@ public class NominatimGeoResolveService {
 		this.nominatimUrl = nominatimUrl;
 	}
 	
+	@Override
 	public String resolvePointName(double latitude, double longitude) {
 		final NominatimClient nominatimClient = new JsonNominatimClient(nominatimUrl, new DefaultHttpClient(), nominatimEmail, null, false, false);
 		try {
