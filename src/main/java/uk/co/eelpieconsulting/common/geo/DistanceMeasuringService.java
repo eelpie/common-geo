@@ -6,6 +6,8 @@ import geo.google.datamodel.GeoUtils;
 
 import org.apache.log4j.Logger;
 
+import uk.co.eelpieconsulting.common.geo.model.LatLong;
+
 public class DistanceMeasuringService {
 	
 	private static Logger log = Logger.getLogger(DistanceMeasuringService.class);

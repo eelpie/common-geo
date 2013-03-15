@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import uk.co.eelpieconsulting.common.geo.LatLong;
 import uk.co.eelpieconsulting.common.geo.OSRefConvertor;
+import uk.co.eelpieconsulting.common.geo.model.LatLong;
 
 
 public class OSRefConvertorTest {

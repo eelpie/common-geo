@@ -1,5 +1,6 @@
 package uk.co.eelpieconsulting.common.geo;
 
+import uk.co.eelpieconsulting.common.geo.model.LatLong;
 import uk.me.jstott.jcoord.LatLng;
 import uk.me.jstott.jcoord.OSRef;
 

@@ -7,6 +7,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import uk.co.eelpieconsulting.common.geo.model.Place;
+
 public class NominatimGeocodingIT {
 
 	private NominatimGeocodingService service;

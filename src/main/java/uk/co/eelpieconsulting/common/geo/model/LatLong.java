@@ -1,4 +1,4 @@
-package uk.co.eelpieconsulting.common.geo;
+package uk.co.eelpieconsulting.common.geo.model;
 
 public class LatLong {
 

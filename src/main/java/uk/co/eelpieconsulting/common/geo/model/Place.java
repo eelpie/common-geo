@@ -1,6 +1,7 @@
-package uk.co.eelpieconsulting.common.geo;
+package uk.co.eelpieconsulting.common.geo.model;
 
 import java.io.Serializable;
+
 
 public class Place implements Serializable {
     
