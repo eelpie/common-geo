@@ -2,7 +2,6 @@ package uk.co.eelpieconsulting.common.geo.model;
 
 import java.io.Serializable;
 
-
 public class Place implements Serializable {
     
 	private static final long serialVersionUID = 1L;

@@ -1,7 +1,11 @@
 package uk.co.eelpieconsulting.common.geo.model;
 
-public class LatLong {
+import java.io.Serializable;
 
+public class LatLong implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
 	private final double latitude;
 	private final double longitude;
 	

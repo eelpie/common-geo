@@ -1,7 +1,11 @@
 package uk.co.eelpieconsulting.common.geo.model;
 
-public class OsmId {
+import java.io.Serializable;
+
+public class OsmId implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	private long id;
 	private String type;
 
