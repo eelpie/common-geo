@@ -10,6 +10,9 @@ public class Place implements Serializable {
     private LatLong latLong;
     private OsmId osmId;
     
+    public Place() {
+	}
+    
 	public Place(String address, LatLong latLong, OsmId osmId) {
 		this.address = address;
 		this.latLong = latLong;

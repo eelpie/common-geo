@@ -6,8 +6,11 @@ public class LatLong implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private final double latitude;
-	private final double longitude;
+	private double latitude;
+	private double longitude;
+	
+	public LatLong() {
+	}
 	
 	public LatLong(double latitude, double longitude) {
 		this.latitude = latitude;
