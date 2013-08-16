@@ -8,6 +8,9 @@ public class OsmId implements Serializable {
 
 	private long id;
 	private String type;
+	
+	public OsmId() {
+	}
 
 	public OsmId(long id, String type) {
 		this.id = id;

@@ -5,7 +5,7 @@
 	<artifactId>common-geo</artifactId>
 	<packaging>jar</packaging>
 	<name>Common geo</name>
-	<version>1.0.3</version>
+	<version>1.0.4</version>
 	<description>Shared geo functions</description>
 	<build>
 		<plugins>
