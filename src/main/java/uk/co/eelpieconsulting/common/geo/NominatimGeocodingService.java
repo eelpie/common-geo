@@ -58,9 +58,11 @@ public class NominatimGeocodingService implements GeoCodingService {
 	public Place loadPlaceByOsmId(OsmId osmId) {
 		log.info("Resolving OSM id with Nominatim: " + osmId);
 		try {
-			final NominatimClient nominatimClient = getNominatimClient();
+			final NominatimClient nominatimClient = getNominatimClient();			
 			Address address = nominatimClient.getAddress(osmId.getType(), osmId.getId());
-			return address != null ? buildPlaceFromNominatimAddress(address) : null;
+			
+			final boolean isCorrectlyResolvedAddress = address != null && address.getOsmId() != null && address.getOsmType() != null;
+			return isCorrectlyResolvedAddress ? buildPlaceFromNominatimAddress(address) : null;
 			
 		} catch (IOException e) {
 			log.error(e);
