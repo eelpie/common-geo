@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import uk.co.eelpieconsulting.common.geo.model.OsmType;
 import uk.co.eelpieconsulting.common.geo.model.Place;
 
 public class NominatimGeocodingIT {
@@ -25,7 +26,7 @@ public class NominatimGeocodingIT {
 		final Place firstMatch = results.get(0);
 		assertEquals("St James' Presbyterian Church, Adelaide Road, Newtown, Wellington, 6021, New Zealand/Aotearoa", firstMatch.getAddress());
 		assertEquals(301919657, firstMatch.getOsmId().getId());
-		assertEquals("node", firstMatch.getOsmId().getType());
+		assertEquals(OsmType.node, firstMatch.getOsmId().getType());
 	}
 
 	@Test

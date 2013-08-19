@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 
 import uk.co.eelpieconsulting.common.geo.model.LatLong;
 import uk.co.eelpieconsulting.common.geo.model.OsmId;
+import uk.co.eelpieconsulting.common.geo.model.OsmType;
 import uk.co.eelpieconsulting.common.geo.model.Place;
 
 import com.google.common.base.Joiner;
@@ -59,7 +60,7 @@ public class NominatimGeocodingService implements GeoCodingService {
 		log.info("Resolving OSM id with Nominatim: " + osmId);
 		try {
 			final NominatimClient nominatimClient = getNominatimClient();			
-			Address address = nominatimClient.getAddress(osmId.getType(), osmId.getId());
+			Address address = nominatimClient.getAddress(osmId.getType().toString(), osmId.getId());
 			
 			final boolean isCorrectlyResolvedAddress = address != null && address.getOsmId() != null && address.getOsmType() != null;
 			return isCorrectlyResolvedAddress ? buildPlaceFromNominatimAddress(address) : null;
@@ -106,7 +107,8 @@ public class NominatimGeocodingService implements GeoCodingService {
 	}
 	
 	private Place buildPlaceFromNominatimAddress(Address result) {
-		return new Place(result.getDisplayName(), new LatLong(result.getLatitude(), result.getLongitude()), new OsmId(Long.parseLong(result.getOsmId()), result.getOsmType()));
+		return new Place(result.getDisplayName(), new LatLong(result.getLatitude(), result.getLongitude()), 
+				new OsmId(Long.parseLong(result.getOsmId()), OsmType.valueOf(result.getOsmType())));
 	}
 	
 }

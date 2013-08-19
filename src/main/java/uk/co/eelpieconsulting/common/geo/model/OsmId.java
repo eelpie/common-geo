@@ -7,12 +7,12 @@ public class OsmId implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private long id;
-	private String type;
+	private OsmType type;
 	
 	public OsmId() {
 	}
 
-	public OsmId(long id, String type) {
+	public OsmId(long id, OsmType type) {
 		this.id = id;
 		this.type = type;
 	}
@@ -25,11 +25,11 @@ public class OsmId implements Serializable {
 		this.id = id;
 	}
 
-	public String getType() {
+	public OsmType getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(OsmType type) {
 		this.type = type;
 	}
 
