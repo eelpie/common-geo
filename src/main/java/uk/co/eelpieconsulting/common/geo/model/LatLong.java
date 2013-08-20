@@ -13,6 +13,12 @@ public class LatLong implements Serializable {
 	}
 	
 	public LatLong(double latitude, double longitude) {
+		if (latitude < -90 || latitude > 90) {
+			throw new IllegalArgumentException("Latitude is out of bounds");
+		}
+		if (longitude < -180 || longitude > 180) {
+			throw new IllegalArgumentException("Longitude is out of bounds");
+		}
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
