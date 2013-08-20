@@ -1,12 +1,14 @@
 package uk.co.eelpieconsulting.common.geo;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import uk.co.eelpieconsulting.common.geo.model.OsmId;
 import uk.co.eelpieconsulting.common.geo.model.OsmType;
 import uk.co.eelpieconsulting.common.geo.model.Place;
 
@@ -34,6 +36,17 @@ public class NominatimGeocodingIT {
 		List<Place> results = service.resolvePlaceName("Civic Square, Wellington");
 		
 		assertEquals(7, results.size());
+	}
+	
+	@Test
+	public void canLoadPlaceByOsmId() throws Exception {
+		final OsmId osmId = new OsmId(96906280, OsmType.way);
+
+		final Place loadedPlace = service.loadPlaceByOsmId(osmId);
+		
+		assertEquals(96906280, loadedPlace.getOsmId().getId());
+		assertEquals(OsmType.way, loadedPlace.getOsmId().getType());
+		assertTrue(loadedPlace.getAddress().startsWith("Basin Reserve"));
 	}
 	
 }
