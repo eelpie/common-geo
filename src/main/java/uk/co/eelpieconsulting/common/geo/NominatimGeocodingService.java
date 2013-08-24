@@ -77,7 +77,7 @@ public class NominatimGeocodingService implements GeoCodingService {
 	public String resolveNameForPoint(LatLong point) {
 		final NominatimClient nominatimClient = new JsonNominatimClient(nominatimUrl, new DefaultHttpClient(), nominatimUser, null, false, false);
 		try {
-			final Address addressOfPoint = nominatimClient.getAddress(point.getLatitude(), point.getLongitude(), RESOLVER_ZOOM_LEVEL);
+			final Address addressOfPoint = nominatimClient.getAddress(point.getLongitude(), point.getLatitude(), RESOLVER_ZOOM_LEVEL);
 			if (addressOfPoint != null) {
 				return buildDisplayName(addressOfPoint);
 			}

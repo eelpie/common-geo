@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import uk.co.eelpieconsulting.common.geo.model.LatLong;
 import uk.co.eelpieconsulting.common.geo.model.OsmId;
 import uk.co.eelpieconsulting.common.geo.model.OsmType;
 import uk.co.eelpieconsulting.common.geo.model.Place;
@@ -47,6 +48,15 @@ public class NominatimGeocodingIT {
 		assertEquals(96906280, loadedPlace.getOsmId().getId());
 		assertEquals(OsmType.way, loadedPlace.getOsmId().getType());
 		assertTrue(loadedPlace.getAddress().startsWith("Basin Reserve"));
+	}
+	
+	@Test
+	public void canResolvePlacenameForLatLongPoint() throws Exception {
+		final LatLong place = new LatLong(51.41815945187908, -0.2309974358582336);
+		
+		final String placeName = service.resolveNameForPoint(place);
+		
+		assertEquals("Copse Hill, Raynes Park, London Borough of Merton", placeName);
 	}
 	
 }
