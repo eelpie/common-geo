@@ -27,7 +27,7 @@ public class NominatimGeocodingIT {
 		List<Place> results = service.resolvePlaceName("St James Presbyterian Church, Newtown, Wellington");
 		
 		final Place firstMatch = results.get(0);
-		assertEquals("St James' Presbyterian Church, Adelaide Road, Newtown, Wellington, 6021, New Zealand/Aotearoa", firstMatch.getAddress());
+		assertEquals("St James' Presbyterian Church, Adelaide Road, Kowhai Park, Newtown, Wellington, 6021, New Zealand/Aotearoa", firstMatch.getAddress());
 		assertEquals(301919657, firstMatch.getOsmId().getId());
 		assertEquals(OsmType.node, firstMatch.getOsmId().getType());
 	}
@@ -36,7 +36,7 @@ public class NominatimGeocodingIT {
 	public void canResolveAddressWithMultipleResults() throws Exception {
 		List<Place> results = service.resolvePlaceName("Civic Square, Wellington");
 		
-		assertEquals(7, results.size());
+		assertEquals(8, results.size());
 	}
 	
 	@Test
@@ -56,7 +56,7 @@ public class NominatimGeocodingIT {
 		
 		final String placeName = service.resolveNameForPoint(place);
 		
-		assertEquals("Copse Hill, Raynes Park, London Borough of Merton", placeName);
+		assertEquals("Copse Hill, Raynes Park, London", placeName);
 	}
 	
 }
