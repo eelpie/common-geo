@@ -16,12 +16,13 @@ import com.google.common.collect.Lists;
 
 import fr.dudie.nominatim.client.JsonNominatimClient;
 import fr.dudie.nominatim.client.NominatimClient;
+import fr.dudie.nominatim.client.request.NominatimReverseRequest;
 import fr.dudie.nominatim.model.Address;
 import fr.dudie.nominatim.model.AddressElement;
 
 public class NominatimGeocodingService implements GeoCodingService {
 	
-	private static Logger log = Logger.getLogger(NominatimGeocodingService.class);
+	private final static Logger log = Logger.getLogger(NominatimGeocodingService.class);
 
 	private static final int RESOLVER_ZOOM_LEVEL = 17;
 	
@@ -60,9 +61,12 @@ public class NominatimGeocodingService implements GeoCodingService {
 		log.info("Resolving OSM id with Nominatim: " + osmId);
 		try {
 			final NominatimClient nominatimClient = getNominatimClient();			
-			final String nominatimOsmType = osmId.getType().toString().substring(0, 1).toUpperCase();
+			final String nominatimOsmType = osmId.getType().toString().toUpperCase();
 			
-			final Address address = nominatimClient.getAddress(nominatimOsmType, osmId.getId());
+			final NominatimReverseRequest query = new NominatimReverseRequest();
+			query.setQuery(fr.dudie.nominatim.client.request.paramhelper.OsmType.valueOf(nominatimOsmType) , osmId.getId());
+			
+			final Address address = nominatimClient.getAddress(query);
 			
 			final boolean isCorrectlyResolvedAddress = address != null && address.getOsmId() != null && address.getOsmType() != null;
 			return isCorrectlyResolvedAddress ? buildPlaceFromNominatimAddress(address) : null;
@@ -75,7 +79,7 @@ public class NominatimGeocodingService implements GeoCodingService {
 	
 	@Override
 	public String resolveNameForPoint(LatLong point) {
-		final NominatimClient nominatimClient = new JsonNominatimClient(nominatimUrl, new DefaultHttpClient(), nominatimUser, null, false, false);
+		final NominatimClient nominatimClient = getNominatimClient();
 		try {
 			final Address addressOfPoint = nominatimClient.getAddress(point.getLongitude(), point.getLatitude(), RESOLVER_ZOOM_LEVEL);
 			if (addressOfPoint != null) {
@@ -104,8 +108,7 @@ public class NominatimGeocodingService implements GeoCodingService {
 	}
 	
 	private NominatimClient getNominatimClient() {
-		final NominatimClient nominatimClient = new JsonNominatimClient(nominatimUrl, new DefaultHttpClient(), nominatimUser, null, false, false);
-		return nominatimClient;
+		return new JsonNominatimClient(nominatimUrl, new DefaultHttpClient(), nominatimUser);
 	}
 	
 	private Place buildPlaceFromNominatimAddress(Address result) {
