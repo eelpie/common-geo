@@ -51,6 +51,17 @@ public class NominatimGeocodingIT {
 	}
 	
 	@Test
+	public void canLoadPlaceByLongOsmId() throws Exception {
+		final OsmId osmId = new OsmId(2697241960L, OsmType.node);
+
+		final Place loadedPlace = service.loadPlaceByOsmId(osmId);
+		
+		assertEquals(2697241960L, loadedPlace.getOsmId().getId());
+		assertEquals(OsmType.node, loadedPlace.getOsmId().getType());
+		assertTrue(loadedPlace.getAddress().startsWith("Star Boating Club"));
+	}
+	
+	@Test
 	public void canResolvePlacenameForLatLongPoint() throws Exception {
 		final LatLong place = new LatLong(51.41815945187908, -0.2309974358582336);
 		
