@@ -41,13 +41,22 @@ public class NominatimGeocodingIT {
 	
 	@Test
 	public void canLoadPlaceByOsmId() throws Exception {
-		final OsmId osmId = new OsmId(96906280, OsmType.way);
+		final OsmId basinReserve = new OsmId(96906280, OsmType.way);
 
-		final Place loadedPlace = service.loadPlaceByOsmId(osmId);
+		final Place loadedPlace = service.loadPlaceByOsmId(basinReserve);
 		
 		assertEquals(96906280, loadedPlace.getOsmId().getId());
 		assertEquals(OsmType.way, loadedPlace.getOsmId().getType());
 		assertTrue(loadedPlace.getAddress().startsWith("Basin Reserve"));
+	}
+	
+	@Test
+	public void canHandleNonLatinPlacenames() throws Exception {
+		final OsmId admiraltyStation = new OsmId(248960443, OsmType.way);
+		
+		final Place loadedPlace = service.loadPlaceByOsmId(admiraltyStation);
+		
+		assertEquals("金鐘 Admiralty, 德立街 Drake Street, 金鐘 Admiralty, 中西區 Central and Western District, 香港島 Hong Kong Island, 香港 Hong Kong, 中华人民共和国/China", loadedPlace.getAddress());
 	}
 	
 	@Test
