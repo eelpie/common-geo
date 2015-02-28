@@ -19,9 +19,9 @@ public class BoundingBoxService {
 			lonLow = lonLow == null || point.getLongitude() < lonLow ? point.getLongitude() : lonLow;
 			lonHigh = lonHigh == null || point.getLongitude() > lonHigh ? point.getLongitude() : lonHigh;
 		}
-
-		LatLong topLeft = new LatLong(latLow, lonHigh);
-		LatLong bottomRight = new LatLong(latHigh, lonLow);
+		
+		LatLong topLeft = new LatLong(latHigh, lonLow);
+		LatLong bottomRight = new LatLong(latLow, lonHigh);
 		return new BoundingBox(topLeft, bottomRight);
 	}
 
