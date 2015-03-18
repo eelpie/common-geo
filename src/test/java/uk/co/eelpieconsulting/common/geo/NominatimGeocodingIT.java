@@ -19,7 +19,7 @@ public class NominatimGeocodingIT {
 	
 	@Before
 	public void setup() {
-		service = new NominatimGeocodingService("tony@eelpieconsulting.co.uk", "http://nominatim.openstreetmap.org/");
+		service = new NominatimGeocodingService("tony@eelpieconsulting.co.uk", "http://heathfield.local/");
 	}
 	
 	@Test
@@ -27,47 +27,49 @@ public class NominatimGeocodingIT {
 		List<Place> results = service.resolvePlaceName("St James Presbyterian Church, Newtown, Wellington");
 		
 		final Place firstMatch = results.get(0);
-		assertEquals("St James' Presbyterian Church, Adelaide Road, Kowhai Park, Newtown, Wellington, 6021, New Zealand/Aotearoa", firstMatch.getAddress());
+		assertEquals("St James' Presbyterian Church, Adelaide Road, Kowhai Park, Newtown, Wellington, Wellington City, Wellington, 6023, New Zealand/Aotearoa", firstMatch.getAddress());
 		assertEquals(301919657, firstMatch.getOsmId().getId());
-		assertEquals(OsmType.node, firstMatch.getOsmId().getType());
+		assertEquals(OsmType.NODE, firstMatch.getOsmId().getType());
 	}
 
 	@Test
 	public void canResolveAddressWithMultipleResults() throws Exception {
 		List<Place> results = service.resolvePlaceName("Civic Square, Wellington");
 		
-		assertEquals(8, results.size());
+		assertEquals(2, results.size());
 	}
 	
 	@Test
 	public void canLoadPlaceByOsmId() throws Exception {
-		final OsmId basinReserve = new OsmId(96906280, OsmType.way);
+		final OsmId basinReserve = new OsmId(96906280, OsmType.WAY);
 
 		final Place loadedPlace = service.loadPlaceByOsmId(basinReserve);
 		
 		assertEquals(96906280, loadedPlace.getOsmId().getId());
-		assertEquals(OsmType.way, loadedPlace.getOsmId().getType());
+		assertEquals(OsmType.WAY, loadedPlace.getOsmId().getType());
 		assertTrue(loadedPlace.getAddress().startsWith("Basin Reserve"));
+		
+		
 	}
 	
 	@Test
 	public void canHandleNonLatinPlacenames() throws Exception {
-		final OsmId admiraltyStation = new OsmId(248960443, OsmType.way);
+		final OsmId admiraltyStation = new OsmId(248960443, OsmType.WAY);
 		
 		final Place loadedPlace = service.loadPlaceByOsmId(admiraltyStation);
 		
-		assertEquals("金鐘 Admiralty, 德立街 Drake Street, 金鐘 Admiralty, 中西區 Central and Western District, 香港島 Hong Kong Island, 香港 Hong Kong, 中华人民共和国/China", loadedPlace.getAddress());
+		assertEquals("金鐘 Admiralty, 德立街 Drake Street, 金鐘 Admiralty, 中西區 Central and Western District, 香港島 Hong Kong Island, 香港特別行政區 Hong Kong, 中华人民共和国", loadedPlace.getAddress());
 	}
 	
 	@Test
 	public void canLoadPlaceByLongOsmId() throws Exception {
-		final OsmId osmId = new OsmId(2697241960L, OsmType.node);
+		final OsmId osmId = new OsmId(88273570L, OsmType.WAY);
 
 		final Place loadedPlace = service.loadPlaceByOsmId(osmId);
 		
-		assertEquals(2697241960L, loadedPlace.getOsmId().getId());
-		assertEquals(OsmType.node, loadedPlace.getOsmId().getType());
-		assertTrue(loadedPlace.getAddress().startsWith("Star Boating Club"));
+		assertEquals(88273570L, loadedPlace.getOsmId().getId());
+		assertEquals(OsmType.WAY, loadedPlace.getOsmId().getType());
+		assertEquals("The Boatshed, Odlins Plaza, Te Aro, Wellington, Wellington City, Wellington, 6011, New Zealand/Aotearoa", loadedPlace.getAddress());
 	}
 	
 	@Test
@@ -76,7 +78,7 @@ public class NominatimGeocodingIT {
 		
 		final String placeName = service.resolveNameForPoint(place);
 		
-		assertEquals("Copse Hill, Raynes Park, London", placeName);
+		assertEquals("Copse Hill, Raynes Park, London Borough of Merton", placeName);
 	}
 	
 }

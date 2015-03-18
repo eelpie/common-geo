@@ -113,7 +113,7 @@ public class NominatimGeocodingService implements GeoCodingService {
 	
 	private Place buildPlaceFromNominatimAddress(Address result) {
 		return new Place(result.getDisplayName(), new LatLong(result.getLatitude(), result.getLongitude()), 
-				new OsmId(Long.parseLong(result.getOsmId()), OsmType.valueOf(result.getOsmType())));
+				new OsmId(Long.parseLong(result.getOsmId()), OsmType.valueOf(result.getOsmType().toUpperCase())));
 	}
 	
 }
