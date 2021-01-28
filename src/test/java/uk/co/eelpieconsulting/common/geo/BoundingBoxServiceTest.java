@@ -21,7 +21,7 @@ public class BoundingBoxServiceTest {
 	private final BoundingBoxService boundingBoxService = new BoundingBoxService();
 	
 	@Test
-	public void canBuildBoundingBoxToEnclosePoints() throws Exception {
+	public void canBuildBoundingBoxToEnclosePoints() {
 		final List<LatLong> points = Lists.newArrayList(new LatLong(10, 1), new LatLong(20, 2), new LatLong(30, 3));
 
 		final BoundingBox boundingBox = boundingBoxService.getBoundingBoxFor(points);
@@ -33,7 +33,7 @@ public class BoundingBoxServiceTest {
 	}
 	
 	@Test
-	public void canCreateBoundingBoxForComplexShapes() throws Exception {		
+	public void canCreateBoundingBoxForComplexShapes() {
 		BoundingBox twickenhamBoundingBox = boundingBoxService.getBoundingBoxFor(parsePoints(twickenham));
 		assertEquals(51.4654, twickenhamBoundingBox.getTopLeft().getLatitude(), 0);
 		assertEquals(-0.3929, twickenhamBoundingBox.getTopLeft().getLongitude(), 0);
