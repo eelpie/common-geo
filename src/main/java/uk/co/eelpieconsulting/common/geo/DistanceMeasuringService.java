@@ -1,23 +1,26 @@
 package uk.co.eelpieconsulting.common.geo;
 
-import geo.google.datamodel.GeoAltitude;
-import geo.google.datamodel.GeoCoordinate;
-import geo.google.datamodel.GeoUtils;
-
 import org.apache.log4j.Logger;
-
+import org.locationtech.spatial4j.context.SpatialContext;
+import org.locationtech.spatial4j.distance.DistanceUtils;
+import org.locationtech.spatial4j.shape.Point;
 import uk.co.eelpieconsulting.common.geo.model.LatLong;
 
 public class DistanceMeasuringService {
-	
-	private static Logger log = Logger.getLogger(DistanceMeasuringService.class);
-	
-	public double getDistanceBetween(LatLong here, LatLong there) {
-		final GeoCoordinate hereCoordinate = new GeoCoordinate(here.getLatitude(), here.getLongitude(), new GeoAltitude(0));
-		final GeoCoordinate thereCoordinate = new GeoCoordinate(there.getLatitude(), there.getLongitude(), new GeoAltitude(0));
-		final double distanceBetweenInKm = GeoUtils.distanceBetweenInKm(hereCoordinate, thereCoordinate);
-		log.debug("Distance from " + here + " to " + there  + " is " + distanceBetweenInKm);
-		return distanceBetweenInKm;
-	}
-	
+
+    private static Logger log = Logger.getLogger(DistanceMeasuringService.class);
+
+    private final SpatialContext ctx = SpatialContext.GEO;
+
+    public double getDistanceBetween(LatLong here, LatLong there) {
+        Point h = ctx.makePoint(here.getLatitude(), here.getLongitude());
+        Point t = ctx.makePoint(there.getLatitude(), there.getLongitude());
+
+        double distanceBetweenHereAndThereRadians = ctx.calcDistance(h, t);
+        double distanceBetweenHereAndThereInKilometres = DistanceUtils.degrees2Dist(distanceBetweenHereAndThereRadians, DistanceUtils.EARTH_MEAN_RADIUS_KM);
+
+        log.debug("Distance from " + here + " to " + there + " is " + distanceBetweenHereAndThereInKilometres);
+        return distanceBetweenHereAndThereInKilometres;
+    }
+
 }
