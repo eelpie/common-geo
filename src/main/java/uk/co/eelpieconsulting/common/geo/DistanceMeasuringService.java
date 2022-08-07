@@ -1,14 +1,14 @@
 package uk.co.eelpieconsulting.common.geo;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.locationtech.spatial4j.context.SpatialContext;
 import org.locationtech.spatial4j.distance.DistanceUtils;
 import org.locationtech.spatial4j.shape.Point;
 import uk.co.eelpieconsulting.common.geo.model.LatLong;
-
 public class DistanceMeasuringService {
 
-    private static Logger log = Logger.getLogger(DistanceMeasuringService.class);
+    private static Logger log = LogManager.getLogger(DistanceMeasuringService.class);
 
     private final SpatialContext ctx = SpatialContext.GEO;
 

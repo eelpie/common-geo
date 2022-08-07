@@ -1,28 +1,27 @@
 package uk.co.eelpieconsulting.common.geo;
 
-import java.io.IOException;
-import java.util.List;
-
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.log4j.Logger;
-
-import uk.co.eelpieconsulting.common.geo.model.LatLong;
-import uk.co.eelpieconsulting.common.geo.model.OsmId;
-import uk.co.eelpieconsulting.common.geo.model.OsmType;
-import uk.co.eelpieconsulting.common.geo.model.Place;
-
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
-
 import fr.dudie.nominatim.client.JsonNominatimClient;
 import fr.dudie.nominatim.client.NominatimClient;
 import fr.dudie.nominatim.client.request.NominatimReverseRequest;
 import fr.dudie.nominatim.model.Address;
 import fr.dudie.nominatim.model.AddressElement;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import uk.co.eelpieconsulting.common.geo.model.LatLong;
+import uk.co.eelpieconsulting.common.geo.model.OsmId;
+import uk.co.eelpieconsulting.common.geo.model.OsmType;
+import uk.co.eelpieconsulting.common.geo.model.Place;
+
+import java.io.IOException;
+import java.util.List;
+
 
 public class NominatimGeocodingService implements GeoCodingService {
 	
-	private final static Logger log = Logger.getLogger(NominatimGeocodingService.class);
+	private final static Logger log = LogManager.getLogger(NominatimGeocodingService.class);
 
 	private static final int RESOLVER_ZOOM_LEVEL = 17;
 	
