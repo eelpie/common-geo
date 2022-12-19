@@ -14,6 +14,17 @@ public class DistanceMeasuringServiceTest {
 
         double distanceInKilometers = new DistanceMeasuringService().getDistanceBetween(here, there);
 
-        assertEquals(15.72, distanceInKilometers, 0.1);
+        assertEquals(13.1, distanceInKilometers, 0.1);
     }
+
+    @Test
+    public void worksCorrectlyForLargeLatLongs() {
+        LatLong here = new LatLong(-41.2924, 174.7787);
+        LatLong there = new LatLong(-42.1, 174.7787);
+
+        double distanceInKilometers = new DistanceMeasuringService().getDistanceBetween(here, there);
+
+        assertEquals(89.9, distanceInKilometers, 0.1);
+    }
+
 }

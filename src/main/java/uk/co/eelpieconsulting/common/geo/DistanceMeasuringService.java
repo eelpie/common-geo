@@ -13,8 +13,8 @@ public class DistanceMeasuringService {
     private final SpatialContext ctx = SpatialContext.GEO;
 
     public double getDistanceBetween(LatLong here, LatLong there) {
-        Point h = ctx.makePoint(here.getLatitude(), here.getLongitude());
-        Point t = ctx.makePoint(there.getLatitude(), there.getLongitude());
+        Point h = ctx.makePoint(here.getLongitude(), here.getLatitude());
+        Point t = ctx.makePoint(there.getLongitude(), there.getLatitude());
 
         double distanceBetweenHereAndThereRadians = ctx.calcDistance(h, t);
         double distanceBetweenHereAndThereInKilometres = DistanceUtils.degrees2Dist(distanceBetweenHereAndThereRadians, DistanceUtils.EARTH_MEAN_RADIUS_KM);
